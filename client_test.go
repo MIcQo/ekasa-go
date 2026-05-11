@@ -28,7 +28,9 @@ func TestClient_GetCustomer(t *testing.T) {
 
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(mockResponse)
+		if err := json.NewEncoder(w).Encode(mockResponse); err != nil {
+			t.Errorf("Encode failed: %v", err)
+		}
 	}))
 	defer server.Close()
 
@@ -62,7 +64,9 @@ func TestClient_RegisterReceipt(t *testing.T) {
 
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(mockResponse)
+		if err := json.NewEncoder(w).Encode(mockResponse); err != nil {
+			t.Errorf("Encode failed: %v", err)
+		}
 	}))
 	defer server.Close()
 
@@ -93,7 +97,9 @@ func TestClient_HandleError(t *testing.T) {
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusNotFound)
-		json.NewEncoder(w).Encode(pd)
+		if err := json.NewEncoder(w).Encode(pd); err != nil {
+			t.Errorf("Encode failed: %v", err)
+		}
 	}))
 	defer server.Close()
 

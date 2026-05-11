@@ -22,7 +22,9 @@ func TestModels_JSONNullability(t *testing.T) {
 	}
 
 	var m map[string]interface{}
-	json.Unmarshal(data, &m)
+	if err := json.Unmarshal(data, &m); err != nil {
+		t.Fatalf("Unmarshal failed: %v", err)
+	}
 
 	if _, ok := m["invoiceNumber"]; ok {
 		t.Error("invoiceNumber should be omitted when nil")
@@ -49,7 +51,9 @@ func TestModels_JSONNullability(t *testing.T) {
 		t.Fatalf("Marshal failed: %v", err)
 	}
 
-	json.Unmarshal(data, &m)
+	if err := json.Unmarshal(data, &m); err != nil {
+		t.Fatalf("Unmarshal failed: %v", err)
+	}
 	opts := m["options"].(map[string]interface{})
 	if val, ok := opts["openDrawer"]; !ok || val != true {
 		t.Errorf("openDrawer should be true, got %v", val)
