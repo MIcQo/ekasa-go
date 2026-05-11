@@ -5,7 +5,7 @@ This is a Go client for the [e-Kasa cloud solution](https://github.com/ninedigit
 ## Installation
 
 ```bash
-go get ekasa
+go get github.com/MIcQo/ekasa-go
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ The client uses the functional options pattern for configuration.
 
 ```go
 import (
-    "ekasa"
+    "github.com/MIcQo/ekasa-go"
     "time"
 )
 
